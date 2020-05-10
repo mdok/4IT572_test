@@ -1,29 +1,36 @@
-vse: &vse
-  docker:
-    - image: circleci/node:8.11.3
+# vse: &vse
+#docker:
+#   - image: circleci/node:8.11.3
 
 version: 2.1
 jobs:
   build:
-    <<: *vse
+    #<<: *vse
+    docker:
+      - image: circleci/node:8.11.3
+
     steps:
       - checkout
       - run: npm install
       - run: npm run test
       - run: npm run build
-      - run: docker build -t ansible:latest .
+      #- run: docker build -t ansible:latest .
       - persist_to_workspace:
           root: .
           paths:
             - .
   deploy:
-    <<: *vse
+    #<<: *vse
+    docker:
+      - image: circleci/python:3.7.7
+
     steps:
       - attach_workspace:
           at: .
-      - run: docker run ansible
+     #- run: docker run ansible
+      - run: pip3 install ansible boto boto3
       - run:
-          command: cd ansibled && echo $key > key_file.txt &&  ansible-playbook ec2_deploy.yml --user ubuntu --key-file key_file.txt
+          command: cd ansible && echo $key > key_file.txt &&  chmod 400 key_file.txt && ansible-playbook ec2_deploy.yml --user ubuntu --key-file key_file.txt
 
 workflows:
   version: 2.1
