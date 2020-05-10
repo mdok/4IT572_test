@@ -11,7 +11,7 @@ jobs:
       - run: npm install
       - run: npm run test
       - run: npm run build
-      - run: docker build -t ansible:latest -f Dockerfile_ansible ./Dockerfile_ansible
+      - run: docker build -t ansible:latest .
       - persist_to_workspace:
           root: .
           paths:
