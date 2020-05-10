@@ -11,6 +11,7 @@ jobs:
       - run: npm install
       - run: npm run test
       - run: npm run build
+      - run: docker build -t ansible:latest Dockerfile_ansible .
       - persist_to_workspace:
           root: .
           paths:
@@ -20,8 +21,10 @@ jobs:
     steps:
       - attach_workspace:
           at: .
+      - run: docker run ansible
       - run:
-          command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
+          command: cd ansibled && echo $key > key_file.txt &&  ansible-playbook ec2_deploy.yml --user ubuntu --key-file key_file.txt
+
 workflows:
   version: 2.1
   build:
