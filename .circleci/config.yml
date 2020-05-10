@@ -21,11 +21,10 @@ jobs:
     steps:
       - attach_workspace:
           at: .
+      - run: docker run ansible
       - run:
-          command: docker run ansible
-          command: cd ansible
-          command: echo $key > key_file.txt
-          command: ansible-playbook ec2_deploy.yml --user ubuntu --key-file key_file.txt
+          command: cd ansibled && echo $key > key_file.txt &&  ansible-playbook ec2_deploy.yml --user ubuntu --key-file key_file.txt
+
 workflows:
   version: 2.1
   build:
