@@ -25,7 +25,7 @@ jobs:
           at: .
       - run: pip3 install ansible boto boto3 
       - run:
-          command: ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook ec2_deploy.yml --user ubuntu 
+          command: ansible-playbook ec2_deploy.yml --user ubuntu 
 
 workflows:
   version: 2.1
