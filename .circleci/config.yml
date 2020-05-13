@@ -18,6 +18,9 @@ jobs:
       - image: circleci/python:3.7.7
 
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "1c:b4:33:72:c7:03:82:27:5d:27:5f:90:26:f5:f0:50"
       - attach_workspace:
           at: .
       - run: pip3 install ansible boto boto3 
