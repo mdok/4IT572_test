@@ -12,7 +12,7 @@
        vpc_subnet_id: subnet-1183291f
        assign_public_ip: yes
        wait: yes
-       count: 1
+       exact_count: 1
        group: eshop
        aws_access_key: "{{access_key}}"
        aws_secret_key: "{{secret_key}}"
