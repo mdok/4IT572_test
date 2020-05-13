@@ -12,7 +12,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - ansible
+            - .
   deploy:
     docker:
       - image: circleci/python:3.7.7
@@ -22,7 +22,7 @@ jobs:
           at: .
       - run: pip3 install ansible boto boto3 
       - run:
-          command: git clone https://github.com/mdok/depend.git && mv depend/presentation1.pem /ansible && cd /ansible && chmod 400 presentation1.pem &&  ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook ec2_deploy.yml --user ubuntu --key-file key_file.txt
+          command: cd /ansible && chmod 400 ~/.ssh/ec2 &&  ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook ec2_deploy.yml --user ubuntu --key-file ~/.ssh/ec2
 
 workflows:
   version: 2.1
