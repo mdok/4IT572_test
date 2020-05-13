@@ -22,7 +22,7 @@ jobs:
           at: .
       - run: pip3 install ansible boto boto3 
       - run:
-          command: cd /ansible && chmod 400 ~/.ssh/ec2 &&  ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook ec2_deploy.yml --user ubuntu --key-file ~/.ssh/ec2
+          command: chmod 400 ~/.ssh/ec2 &&  ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook ec2_deploy.yml --user ubuntu --key-file ~/.ssh/ec2
 
 workflows:
   version: 2.1
