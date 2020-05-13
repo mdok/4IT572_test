@@ -12,7 +12,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - .
+            - ansible
   deploy:
     docker:
       - image: circleci/python:3.7.7
