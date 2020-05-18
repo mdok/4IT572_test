@@ -3,6 +3,19 @@
   connection: local
 
   tasks:
+   - name: Get list of running instances
+    
+     ec2_instance_info:
+       region: us-east-1
+       filters:
+           instance-state-name: [ "running" ]
+     register: ec2_running
+
+   - name: Terminate running EC2 instance
+     ec2_instance:
+       state: 'absent'
+     with_items: '{{ec2_running.instances}}'
+
    - name: Lunch EC2 instance
      ec2:
        instance_type: t2.micro
@@ -57,4 +70,3 @@
      become: yes
    - wait_for:
        port: 80
-
